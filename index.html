@@ -18,7 +18,7 @@
     </style>
 </head>
 <body class="bg-gradient-to-b from-slate-50 to-white">
-
+    
     <!-- Header -->
     <header class="border-b bg-white shadow-sm sticky top-0 z-50">
         <div class="container mx-auto px-4 py-4">
@@ -30,7 +30,7 @@
                         <p class="text-xs md:text-sm text-slate-600" id="tagline">Suppléments de qualité supérieure</p>
                     </div>
                 </div>
-
+                
                 <div class="flex gap-2">
                     <button onclick="setLanguage('fr')" id="btn-fr" class="px-4 py-2 rounded-md font-medium text-sm bg-blue-600 text-white">
                         Français
@@ -58,11 +58,9 @@
                     <img src="./public/qr-piyay-whatsapp.jpeg" alt="QR Code WhatsApp" class="w-48 h-48 mx-auto object-contain">
                 </div>
 
-                <!-- Catalogue QR -->
                 <!-- Catalogue QR (généré automatiquement) -->
                 <div class="p-6 bg-white rounded-lg shadow-lg">
                     <p class="text-slate-900 font-semibold mb-3" id="catalogAccessText">Accéder au catalogue en ligne</p>
-                    <img src="./public/qr-catalogue-piyay.jpg" alt="QR Code Catalogue" class="w-48 h-48 mx-auto object-contain">
                     <canvas id="qr-catalogue" class="mx-auto" style="width: 192px; height: 192px;"></canvas>
                     <p class="text-xs text-slate-600 mt-2" id="scanText">Scannez pour visiter le catalogue</p>
                 </div>
@@ -90,8 +88,22 @@
     <script>
         // Generate QR Code for current page URL
         window.addEventListener('load', function() {
+            console.log('[v0] Page chargée, génération du QR code...');
             const currentURL = window.location.href;
-            QRCode.toCanvas(document.getElementById('qr-catalogue'), currentURL, {
+            console.log('[v0] URL actuelle:', currentURL);
+            
+            const canvas = document.getElementById('qr-catalogue');
+            if (!canvas) {
+                console.error('[v0] Canvas qr-catalogue non trouvé!');
+                return;
+            }
+            
+            if (typeof QRCode === 'undefined') {
+                console.error('[v0] Bibliothèque QRCode non chargée!');
+                return;
+            }
+            
+            QRCode.toCanvas(canvas, currentURL, {
                 width: 192,
                 margin: 2,
                 color: {
@@ -99,7 +111,11 @@
                     light: '#ffffff'
                 }
             }, function (error) {
-                if (error) console.error('Erreur génération QR code:', error);
+                if (error) {
+                    console.error('[v0] Erreur génération QR code:', error);
+                } else {
+                    console.log('[v0] QR code généré avec succès!');
+                }
             });
         });
 
@@ -252,7 +268,7 @@
         function setLanguage(lang) {
             currentLang = lang;
             const t = translations[lang];
-
+            
             // Update buttons
             document.getElementById('btn-fr').className = lang === 'fr' 
                 ? 'px-4 py-2 rounded-md font-medium text-sm bg-blue-600 text-white'
@@ -260,7 +276,7 @@
             document.getElementById('btn-ht').className = lang === 'ht' 
                 ? 'px-4 py-2 rounded-md font-medium text-sm bg-blue-600 text-white'
                 : 'px-4 py-2 rounded-md font-medium text-sm border border-slate-300 text-slate-700';
-
+            
             // Update text
             document.getElementById('tagline').textContent = t.tagline;
             document.getElementById('catalogTitle').textContent = t.catalogTitle;
@@ -269,7 +285,7 @@
             document.getElementById('catalogAccessText').textContent = t.catalogAccessText;
             document.getElementById('scanText').textContent = t.scanText;
             document.getElementById('copyright').textContent = t.copyright;
-
+            
             // Reload products
             renderProducts();
         }
@@ -277,7 +293,7 @@
         function renderProducts() {
             const t = translations[currentLang];
             const grid = document.getElementById('productsGrid');
-
+            
             grid.innerHTML = products.map(product => `
                 <div class="overflow-hidden rounded-lg border bg-white shadow-sm hover:shadow-xl transition-shadow">
                     <div class="relative bg-slate-100" style="padding-bottom: 100%;">
