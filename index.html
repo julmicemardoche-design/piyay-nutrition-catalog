@@ -6,6 +6,7 @@
     <title>Piyay Nutrition - Katalòg / Catalogue</title>
     <meta name="description" content="Catalogue de suppléments de nutrition sportive Piyay - Katalòg sipleman nitrisyon espò Piyay">
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
     <style>
         .text-balance { text-wrap: balance; }
         .line-clamp-2 {
@@ -17,6 +18,7 @@
     </style>
 </head>
 <body class="bg-gradient-to-b from-slate-50 to-white">
+
     
     <!-- Header -->
     <header class="border-b bg-white shadow-sm sticky top-0 z-50">
@@ -29,6 +31,7 @@
                         <p class="text-xs md:text-sm text-slate-600" id="tagline">Suppléments de qualité supérieure</p>
                     </div>
                 </div>
+
                 
                 <div class="flex gap-2">
                     <button onclick="setLanguage('fr')" id="btn-fr" class="px-4 py-2 rounded-md font-medium text-sm bg-blue-600 text-white">
@@ -57,9 +60,11 @@
                     <img src="./public/qr-piyay-whatsapp.jpeg" alt="QR Code WhatsApp" class="w-48 h-48 mx-auto object-contain">
                 </div>
 
+                <!-- Catalogue QR -->
                 <!-- Catalogue QR (généré automatiquement) -->
                 <div class="p-6 bg-white rounded-lg shadow-lg">
                     <p class="text-slate-900 font-semibold mb-3" id="catalogAccessText">Accéder au catalogue en ligne</p>
+                    <img src="./public/qr-catalogue-piyay.jpg" alt="QR Code Catalogue" class="w-48 h-48 mx-auto object-contain">
                     <canvas id="qr-catalogue" class="mx-auto" style="width: 192px; height: 192px;"></canvas>
                     <p class="text-xs text-slate-600 mt-2" id="scanText">Scannez pour visiter le catalogue</p>
                 </div>
@@ -85,28 +90,11 @@
     </footer>
 
     <script>
-        // Load QRCode library dynamically and generate QR code
-        function loadQRCodeLibrary() {
-            return new Promise((resolve, reject) => {
-                console.log('[v0] Chargement de la bibliothèque QRCode...');
-                const script = document.createElement('script');
-                script.src = 'https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js';
-                script.onload = () => {
-                    console.log('[v0] Bibliothèque QRCode chargée avec succès!');
-                    resolve();
-                };
-                script.onerror = () => {
-                    console.error('[v0] Erreur lors du chargement de la bibliothèque QRCode');
-                    reject();
-                };
-                document.head.appendChild(script);
-            });
-        }
-
-        // Generate QR Code
-        async function generateQRCode() {
+        // Generate QR Code for current page URL
+        window.addEventListener('load', function() {
             console.log('[v0] Page chargée, génération du QR code...');
             const currentURL = window.location.href;
+            QRCode.toCanvas(document.getElementById('qr-catalogue'), currentURL, {
             console.log('[v0] URL actuelle:', currentURL);
             
             const canvas = document.getElementById('qr-catalogue');
@@ -115,36 +103,27 @@
                 return;
             }
             
-            try {
-                // Wait for QRCode library to load
-                await loadQRCodeLibrary();
-                
-                if (typeof QRCode === 'undefined') {
-                    console.error('[v0] Bibliothèque QRCode non chargée!');
-                    return;
-                }
-                
-                QRCode.toCanvas(canvas, currentURL, {
-                    width: 192,
-                    margin: 2,
-                    color: {
-                        dark: '#000000',
-                        light: '#ffffff'
-                    }
-                }, function (error) {
-                    if (error) {
-                        console.error('[v0] Erreur génération QR code:', error);
-                    } else {
-                        console.log('[v0] QR code généré avec succès!');
-                    }
-                });
-            } catch (error) {
-                console.error('[v0] Erreur:', error);
+            if (typeof QRCode === 'undefined') {
+                console.error('[v0] Bibliothèque QRCode non chargée!');
+                return;
             }
-        }
-
-        // Start generation when page loads
-        window.addEventListener('load', generateQRCode);
+            
+            QRCode.toCanvas(canvas, currentURL, {
+                width: 192,
+                margin: 2,
+                color: {
+                    dark: '#000000',
+                    light: '#ffffff'
+                }
+            }, function (error) {
+                if (error) console.error('Erreur génération QR code:', error);
+                if (error) {
+                    console.error('[v0] Erreur génération QR code:', error);
+                } else {
+                    console.log('[v0] QR code généré avec succès!');
+                }
+            });
+        });
 
         // Translations
         const translations = {
@@ -295,6 +274,7 @@
         function setLanguage(lang) {
             currentLang = lang;
             const t = translations[lang];
+
             
             // Update buttons
             document.getElementById('btn-fr').className = lang === 'fr' 
@@ -303,6 +283,7 @@
             document.getElementById('btn-ht').className = lang === 'ht' 
                 ? 'px-4 py-2 rounded-md font-medium text-sm bg-blue-600 text-white'
                 : 'px-4 py-2 rounded-md font-medium text-sm border border-slate-300 text-slate-700';
+
             
             // Update text
             document.getElementById('tagline').textContent = t.tagline;
@@ -312,6 +293,7 @@
             document.getElementById('catalogAccessText').textContent = t.catalogAccessText;
             document.getElementById('scanText').textContent = t.scanText;
             document.getElementById('copyright').textContent = t.copyright;
+
             
             // Reload products
             renderProducts();
@@ -320,6 +302,7 @@
         function renderProducts() {
             const t = translations[currentLang];
             const grid = document.getElementById('productsGrid');
+
             
             grid.innerHTML = products.map(product => `
                 <div class="overflow-hidden rounded-lg border bg-white shadow-sm hover:shadow-xl transition-shadow">
