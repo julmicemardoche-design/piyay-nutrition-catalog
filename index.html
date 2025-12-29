@@ -6,6 +6,7 @@
     <title>Piyay Nutrition - Katalòg / Catalogue</title>
     <meta name="description" content="Catalogue de suppléments de nutrition sportive Piyay - Katalòg sipleman nitrisyon espò Piyay">
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
     <style>
         .text-balance { text-wrap: balance; }
         .line-clamp-2 {
@@ -57,10 +58,10 @@
                     <img src="./public/qr-piyay-whatsapp.jpeg" alt="QR Code WhatsApp" class="w-48 h-48 mx-auto object-contain">
                 </div>
 
-                <!-- Catalogue QR -->
+                <!-- Catalogue QR (généré automatiquement) -->
                 <div class="p-6 bg-white rounded-lg shadow-lg">
                     <p class="text-slate-900 font-semibold mb-3" id="catalogAccessText">Accéder au catalogue en ligne</p>
-                    <img src="./public/qr-catalogue-piyay.jpg" alt="QR Code Catalogue" class="w-48 h-48 mx-auto object-contain">
+                    <canvas id="qr-catalogue" class="mx-auto" style="width: 192px; height: 192px;"></canvas>
                     <p class="text-xs text-slate-600 mt-2" id="scanText">Scannez pour visiter le catalogue</p>
                 </div>
             </div>
@@ -85,6 +86,21 @@
     </footer>
 
     <script>
+        // Generate QR Code for current page URL
+        window.addEventListener('load', function() {
+            const currentURL = window.location.href;
+            QRCode.toCanvas(document.getElementById('qr-catalogue'), currentURL, {
+                width: 192,
+                margin: 2,
+                color: {
+                    dark: '#000000',
+                    light: '#ffffff'
+                }
+            }, function (error) {
+                if (error) console.error('Erreur génération QR code:', error);
+            });
+        });
+
         // Translations
         const translations = {
             fr: {
