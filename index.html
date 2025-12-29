@@ -3,201 +3,305 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Piyay - Suppléments de Musculation en Haïti</title>
-    <meta name="description" content="Contactez Piyay pour vos suppléments de musculation en Haïti. Disponible à Hinche, Maïssade, Port-de-paix, Gonaives et Village EKAM.">
+    <title>Piyay Nutrition - Katalòg / Catalogue</title>
+    <meta name="description" content="Catalogue de suppléments de nutrition sportive Piyay - Katalòg sipleman nitrisyon espò Piyay">
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
     <style>
-        body {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-        }
-        .card {
-            background: white;
-            border-radius: 16px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 25px 70px rgba(0,0,0,0.4);
-        }
-        .contact-btn {
-            background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
-            transition: all 0.3s ease;
-        }
-        .contact-btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 10px 25px rgba(37, 211, 102, 0.4);
-        }
-        .region-card {
-            border-left: 4px solid #667eea;
-            transition: all 0.3s ease;
-        }
-        .region-card:hover {
-            border-left-color: #25D366;
-            background: #f8f9ff;
-        }
-        #qrcode {
-            display: inline-block;
-            padding: 20px;
-            background: white;
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        .text-balance { text-wrap: balance; }
+        .line-clamp-2 {
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
         }
     </style>
 </head>
-<body class="min-h-screen py-8 px-4">
-    <div class="max-w-4xl mx-auto">
-        <!-- Header avec Logo -->
-        <div class="text-center mb-8">
-            <div class="card p-8 mb-6">
-                <img src="/images/image.png" 
-                     alt="Piyay Logo" 
-                     class="w-64 h-auto mx-auto mb-4">
-                <h1 class="text-4xl font-bold text-gray-800 mb-2">Piyay</h1>
-                <p class="text-xl text-gray-600">Suppléments de Musculation Premium en Haïti</p>
-            </div>
-        </div>
-
-        <!-- Code QR Section -->
-        <div class="card p-8 mb-8 text-center">
-            <h2 class="text-2xl font-bold text-gray-800 mb-4">Scannez pour Contacter</h2>
-            <div id="qrcode" class="inline-block mb-4"></div>
-            <p class="text-gray-600 text-sm">Partagez ce code QR avec vos clients</p>
-            <button onclick="downloadQR()" class="mt-4 px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition">
-                Télécharger le QR Code
-            </button>
-        </div>
-
-        <!-- Contacts par Région -->
-        <div class="card p-8 mb-8">
-            <h2 class="text-3xl font-bold text-gray-800 mb-6 text-center">Nos Agents par Région</h2>
-            <p class="text-center text-gray-600 mb-8">Cliquez sur un numéro pour ouvrir WhatsApp directement</p>
-            
-            <div class="space-y-4">
-                <!-- Hinche -->
-                <div class="region-card bg-gray-50 p-6 rounded-lg">
-                    <h3 class="text-xl font-bold text-gray-800 mb-3 flex items-center">
-                        <span class="text-2xl mr-2">📍</span> Hinche
-                    </h3>
-                    <div class="space-y-2">
-                        <a href="https://wa.me/50948819709" 
-                           class="contact-btn block text-center text-white font-semibold py-3 px-4 rounded-lg">
-                            <span class="text-lg">📱</span> +509 48 81 9709
-                        </a>
-                        <a href="https://wa.me/50936199431" 
-                           class="contact-btn block text-center text-white font-semibold py-3 px-4 rounded-lg">
-                            <span class="text-lg">📱</span> +509 36 19 9431
-                        </a>
+<body class="bg-gradient-to-b from-slate-50 to-white">
+    
+    <!-- Header -->
+    <header class="border-b bg-white shadow-sm sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex items-center justify-between flex-wrap gap-4">
+                <div class="flex items-center gap-4">
+                    <img src="public/logo-piyay.png" alt="Piyay Nutrition" class="w-24 h-16 object-contain">
+                    <div>
+                        <h1 class="text-xl md:text-2xl font-bold text-slate-900">Piyay Nutrition</h1>
+                        <p class="text-xs md:text-sm text-slate-600" id="tagline">Suppléments de qualité supérieure</p>
                     </div>
                 </div>
-
-                <!-- Maïssade -->
-                <div class="region-card bg-gray-50 p-6 rounded-lg">
-                    <h3 class="text-xl font-bold text-gray-800 mb-3 flex items-center">
-                        <span class="text-2xl mr-2">📍</span> Maïssade
-                    </h3>
-                    <div class="space-y-2">
-                        <a href="https://wa.me/50948819709" 
-                           class="contact-btn block text-center text-white font-semibold py-3 px-4 rounded-lg">
-                            <span class="text-lg">📱</span> +509 48 81 9709
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Port-de-paix -->
-                <div class="region-card bg-gray-50 p-6 rounded-lg">
-                    <h3 class="text-xl font-bold text-gray-800 mb-3 flex items-center">
-                        <span class="text-2xl mr-2">📍</span> Port-de-paix
-                    </h3>
-                    <div class="space-y-2">
-                        <a href="https://wa.me/50935630388" 
-                           class="contact-btn block text-center text-white font-semibold py-3 px-4 rounded-lg">
-                            <span class="text-lg">📱</span> +509 35 63 0388
-                        </a>
-                        <a href="https://wa.me/18296832438" 
-                           class="contact-btn block text-center text-white font-semibold py-3 px-4 rounded-lg">
-                            <span class="text-lg">📱</span> +1 829 683 2438
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Gonaives -->
-                <div class="region-card bg-gray-50 p-6 rounded-lg">
-                    <h3 class="text-xl font-bold text-gray-800 mb-3 flex items-center">
-                        <span class="text-2xl mr-2">📍</span> Gonaives
-                    </h3>
-                    <div class="space-y-2">
-                        <a href="https://wa.me/50942598256" 
-                           class="contact-btn block text-center text-white font-semibold py-3 px-4 rounded-lg">
-                            <span class="text-lg">📱</span> +509 42 59 8256
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Village EKAM -->
-                <div class="region-card bg-gray-50 p-6 rounded-lg">
-                    <h3 class="text-xl font-bold text-gray-800 mb-3 flex items-center">
-                        <span class="text-2xl mr-2">📍</span> Village EKAM, Caracol (P56-N)
-                    </h3>
-                    <div class="space-y-2">
-                        <a href="https://wa.me/50948819709" 
-                           class="contact-btn block text-center text-white font-semibold py-3 px-4 rounded-lg">
-                            <span class="text-lg">📱</span> +509 48 81 9709
-                        </a>
-                        <a href="https://wa.me/50948296891" 
-                           class="contact-btn block text-center text-white font-semibold py-3 px-4 rounded-lg">
-                            <span class="text-lg">📱</span> +509 48 29 6891
-                        </a>
-                        <!-- Ajout du nouveau contact pour Village EKAM, Caracol -->
-                        <a href="https://wa.me/50935630388" 
-                           class="contact-btn block text-center text-white font-semibold py-3 px-4 rounded-lg">
-                            <span class="text-lg">📱</span> +509 35 63 0388
-                        </a>
-                    </div>
+                
+                <div class="flex gap-2">
+                    <button onclick="setLanguage('fr')" id="btn-fr" class="px-4 py-2 rounded-md font-medium text-sm bg-blue-600 text-white">
+                        Français
+                    </button>
+                    <button onclick="setLanguage('ht')" id="btn-ht" class="px-4 py-2 rounded-md font-medium text-sm border border-slate-300 text-slate-700">
+                        Kreyòl
+                    </button>
                 </div>
             </div>
         </div>
+    </header>
 
-        <!-- Email Contact -->
-        <div class="card p-8 mb-8 text-center">
-            <h3 class="text-xl font-bold text-gray-800 mb-3">Ou contactez-nous par email</h3>
-            <a href="mailto:piyayyy8@gmail.com" 
-               class="inline-block text-blue-600 hover:text-blue-800 font-semibold text-lg">
-                📧 piyayyy8@gmail.com
-            </a>
-        </div>
+    <!-- Hero Section -->
+    <section class="bg-gradient-to-r from-blue-600 to-purple-600 text-white py-12">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-3xl md:text-5xl font-bold mb-4 text-balance" id="catalogTitle">Catalogue</h2>
+            <p class="text-lg md:text-xl text-blue-100 max-w-3xl mx-auto text-balance mb-8" id="catalogSubtitle">
+                Découvrez notre sélection de suppléments de nutrition sportive de marques premium
+            </p>
 
-        <!-- Footer -->
-        <div class="text-center text-white">
-            <p class="text-sm opacity-90">© 2025 Piyay - Tous droits réservés</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-2xl mx-auto mt-8">
+                <!-- WhatsApp QR -->
+                <div class="p-6 bg-white rounded-lg shadow-lg">
+                    <p class="text-slate-900 font-semibold mb-3" id="contactText">Contactez-nous sur WhatsApp</p>
+                    <img src="public/qr-piyay-whatsapp.jpeg" alt="QR Code WhatsApp" class="w-48 h-48 mx-auto object-contain">
+                </div>
+
+                <!-- Catalogue QR -->
+                <div class="p-6 bg-white rounded-lg shadow-lg">
+                    <p class="text-slate-900 font-semibold mb-3" id="catalogAccessText">Accéder au catalogue en ligne</p>
+                    <img src="public/qr-catalogue-piyay.jpg" alt="QR Code Catalogue" class="w-48 h-48 mx-auto object-contain">
+                    <p class="text-xs text-slate-600 mt-2" id="scanText">Scannez pour visiter le catalogue</p>
+                </div>
+            </div>
         </div>
-    </div>
+    </section>
+
+    <!-- Products Grid -->
+    <section class="py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6" id="productsGrid">
+                <!-- Products will be inserted here by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="border-t bg-slate-900 text-white py-8 mt-12">
+        <div class="container mx-auto px-4 text-center">
+            <img src="public/logo-piyay.png" alt="Piyay" class="w-24 h-12 mx-auto mb-4 object-contain brightness-0 invert">
+            <p class="text-sm text-slate-400" id="copyright">© 2025 Piyay Nutrition. Tous droits réservés.</p>
+        </div>
+    </footer>
 
     <script>
-        // Générer le QR Code
-        const currentURL = window.location.href;
-        const qrcode = new QRCode(document.getElementById("qrcode"), {
-            text: currentURL,
-            width: 200,
-            height: 200,
-            colorDark: "#000000",
-            colorLight: "#ffffff",
-            correctLevel: QRCode.CorrectLevel.H
-        });
-
-        // Fonction pour télécharger le QR Code
-        function downloadQR() {
-            const canvas = document.querySelector('#qrcode canvas');
-            if (canvas) {
-                const url = canvas.toDataURL('image/png');
-                const link = document.createElement('a');
-                link.download = 'piyay-qr-code.png';
-                link.href = url;
-                link.click();
+        // Translations
+        const translations = {
+            fr: {
+                tagline: "Suppléments de qualité supérieure",
+                catalogTitle: "Catalogue",
+                catalogSubtitle: "Découvrez notre sélection de suppléments de nutrition sportive de marques premium",
+                flavor: "Saveur",
+                benefits: "Bienfaits",
+                dosage: "Posologie",
+                contact: "Contactez-nous sur WhatsApp",
+                catalogAccessText: "Accéder au catalogue en ligne",
+                scanText: "Scannez pour visiter le catalogue",
+                copyright: "© 2025 Piyay Nutrition. Tous droits réservés."
+            },
+            ht: {
+                tagline: "Sipleman kalite siperyè",
+                catalogTitle: "Katalòg",
+                catalogSubtitle: "Dekouvri seleksyon sipleman nitrisyon espò nou yo nan mak premyè",
+                flavor: "Gou",
+                benefits: "Benefis",
+                dosage: "Dozaj",
+                contact: "Kontakte nou sou WhatsApp",
+                catalogAccessText: "Aksede katalòg sou entènèt",
+                scanText: "Eskane pou vizite katalòg",
+                copyright: "© 2025 Piyay Nutrition. Tout dwa rezève."
             }
+        };
+
+        // Products Data
+        const products = [
+            {
+                id: 1,
+                name: "R/OAR Ferocious Pre-Workout",
+                brand: "Rule One",
+                category: "Pre-Workout",
+                flavor: "Blue Razz",
+                size: "30 portions",
+                price: 1200,
+                image_url: "public/images/roar-preworkout.jpeg",
+                description_fr: "Pre-workout féroce pour une énergie explosive",
+                description_ht: "Pre-workout pou yon enèji eksplozif",
+                benefits_fr: "Augmente l'énergie, améliore la concentration, booste la performance",
+                benefits_ht: "Ogmante enèji, amelyore konsantrasyon, ranfòse pèfòmans",
+                dosage_fr: "1 mesure 20-30 minutes avant l'entraînement",
+                dosage_ht: "1 mezi 20-30 minit anvan antrènman"
+            },
+            {
+                id: 2,
+                name: "Creatine X3",
+                brand: "SixStar",
+                category: "Créatine",
+                flavor: "Fruit Punch",
+                size: "993g (60 portions)",
+                price: 1200,
+                image_url: "public/images/creatine-x3-sixstar.jpeg",
+                description_fr: "Créatine monohydrate 8g par portion - Construit 4X plus de muscle",
+                description_ht: "Kreyatin monohydrat 8g pa pòsyon - Konstwi 4X plis mis",
+                benefits_fr: "Augmente la force musculaire, améliore la performance, récupération rapide",
+                benefits_ht: "Ogmante fòs misk, amelyore pèfòmans, rekiperasyon rapid",
+                dosage_fr: "1 mesure par jour mélangée avec de l'eau",
+                dosage_ht: "1 mezi pa jou melanje avèk dlo"
+            },
+            {
+                id: 3,
+                name: "100% Whey Protein",
+                brand: "Nutrex",
+                category: "Protéine",
+                flavor: "Vanilla",
+                size: "907g (27 portions)",
+                price: 1550,
+                image_url: "public/images/whey-protein-nutrex.jpeg",
+                description_fr: "Protéine de lactosérum pure pour muscle maigre",
+                description_ht: "Pwoteyin laktoserohm pi pou misk mèg",
+                benefits_fr: "27g de protéine, favorise la croissance musculaire, récupération optimale",
+                benefits_ht: "27g pwoteyin, ankouraje kwasans misk, rekiperasyon optimal",
+                dosage_fr: "1-2 mesures après entraînement ou entre les repas",
+                dosage_ht: "1-2 mezi apre antrènman oswa ant repa"
+            },
+            {
+                id: 4,
+                name: "Creatine Monohydrate",
+                brand: "Nutrex",
+                category: "Créatine",
+                flavor: "Sans saveur",
+                size: "300g (60 portions)",
+                price: 850,
+                image_url: "public/images/creatine-monohydrate-nutrex.jpeg",
+                description_fr: "Créatine monohydrate pure et micronisée",
+                description_ht: "Kreyatin monohydrat pi ak mikronize",
+                benefits_fr: "Augmente force et performance, soutient croissance musculaire",
+                benefits_ht: "Ogmante fòs ak pèfòmans, sipòte kwasans misk",
+                dosage_fr: "1 mesure (5g) par jour avec votre boisson préférée",
+                dosage_ht: "1 mezi (5g) pa jou avèk bwason ou prefere"
+            },
+            {
+                id: 5,
+                name: "Proteína de Soya",
+                brand: "Granix",
+                category: "Protéine",
+                flavor: "Nature",
+                size: "340g (12 oz)",
+                price: 300,
+                image_url: "public/images/proteina-soya-granix.jpeg",
+                description_fr: "Protéine de soya - Gardez la forme!",
+                description_ht: "Pwoteyin soya - Rete an fòm!",
+                benefits_fr: "Source de protéine végétale, sans cholestérol, facile à digérer",
+                benefits_ht: "Sous pwoteyin vegetal, san kolesteròl, fasil pou dijere",
+                dosage_fr: "Ajouter 1 cuillère à soupe dans du lait, jus ou smoothie",
+                dosage_ht: "Ajoute 1 kiyè nan lèt, ji oswa smoothie"
+            },
+            {
+                id: 6,
+                name: "100% Mass Gainer",
+                brand: "MuscleTech",
+                category: "Mass Gainer",
+                flavor: "Chocolate Fudge Brownie",
+                size: "2.33kg (16 portions)",
+                price: 1900,
+                image_url: "public/images/mass-gainer-muscletech.jpeg",
+                description_fr: "Gainer haute protéine pour prise de masse",
+                description_ht: "Gainer wo pwoteyin pou pran mas",
+                benefits_fr: "60g protéine, 1500 calories, 5g créatine par portion",
+                benefits_ht: "60g pwoteyin, 1500 kalori, 5g kreyatin pa pòsyon",
+                dosage_fr: "1 portion entre les repas ou après l'entraînement",
+                dosage_ht: "1 pòsyon ant repa oswa apre antrènman"
+            },
+            {
+                id: 7,
+                name: "Gold Standard 100% Whey Protein",
+                brand: "Optimum Nutrition",
+                category: "Protéine",
+                flavor: "Chocolate Hazelnut",
+                size: "907g (27 portions)",
+                price: 1650,
+                image_url: "public/images/gold-standard-whey-optimum.jpeg",
+                description_fr: "La protéine #1 aux États-Unis pour la récupération musculaire",
+                description_ht: "Pwoteyin #1 nan Etazini pou rekiperasyon misk",
+                benefits_fr: "24g de protéine, soutient la croissance musculaire, récupération rapide",
+                benefits_ht: "24g pwoteyin, sipòte kwasans misk, rekiperasyon rapid",
+                dosage_fr: "1 mesure mélangée avec 180-240ml d'eau froide",
+                dosage_ht: "1 mezi melanje avèk 180-240ml dlo frèt"
+            }
+        ];
+
+        let currentLang = 'fr';
+
+        function setLanguage(lang) {
+            currentLang = lang;
+            const t = translations[lang];
+            
+            // Update buttons
+            document.getElementById('btn-fr').className = lang === 'fr' 
+                ? 'px-4 py-2 rounded-md font-medium text-sm bg-blue-600 text-white'
+                : 'px-4 py-2 rounded-md font-medium text-sm border border-slate-300 text-slate-700';
+            document.getElementById('btn-ht').className = lang === 'ht' 
+                ? 'px-4 py-2 rounded-md font-medium text-sm bg-blue-600 text-white'
+                : 'px-4 py-2 rounded-md font-medium text-sm border border-slate-300 text-slate-700';
+            
+            // Update text
+            document.getElementById('tagline').textContent = t.tagline;
+            document.getElementById('catalogTitle').textContent = t.catalogTitle;
+            document.getElementById('catalogSubtitle').textContent = t.catalogSubtitle;
+            document.getElementById('contactText').textContent = t.contact;
+            document.getElementById('catalogAccessText').textContent = t.catalogAccessText;
+            document.getElementById('scanText').textContent = t.scanText;
+            document.getElementById('copyright').textContent = t.copyright;
+            
+            // Reload products
+            renderProducts();
         }
+
+        function renderProducts() {
+            const t = translations[currentLang];
+            const grid = document.getElementById('productsGrid');
+            
+            grid.innerHTML = products.map(product => `
+                <div class="overflow-hidden rounded-lg border bg-white shadow-sm hover:shadow-xl transition-shadow">
+                    <div class="relative bg-slate-100" style="padding-bottom: 100%;">
+                        <img src="${product.image_url}" alt="${product.name}" class="absolute inset-0 w-full h-full object-contain p-4">
+                        <span class="absolute top-3 right-3 inline-flex items-center rounded-full bg-blue-600 px-3 py-1 text-xs font-semibold text-white">
+                            ${product.category}
+                        </span>
+                    </div>
+                    <div class="p-4">
+                        <p class="text-xs text-slate-500 font-medium mb-1">${product.brand}</p>
+                        <h3 class="font-bold text-lg mb-2 text-balance leading-tight">${product.name}</h3>
+                        ${product.flavor ? `<p class="text-sm text-slate-600 mb-1">${t.flavor}: ${product.flavor}</p>` : ''}
+                        <p class="text-sm text-slate-500 mb-3">${product.size}</p>
+                        
+                        <p class="text-sm text-slate-700 mb-3 line-clamp-2">
+                            ${currentLang === 'fr' ? product.description_fr : product.description_ht}
+                        </p>
+                        
+                        <div class="mb-3">
+                            <p class="text-xs font-semibold text-slate-900 mb-1">${t.benefits}</p>
+                            <p class="text-xs text-slate-600 line-clamp-2">
+                                ${currentLang === 'fr' ? product.benefits_fr : product.benefits_ht}
+                            </p>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <p class="text-xs font-semibold text-slate-900 mb-1">${t.dosage}</p>
+                            <p class="text-xs text-slate-600">
+                                ${currentLang === 'fr' ? product.dosage_fr : product.dosage_ht}
+                            </p>
+                        </div>
+                        
+                        <div class="flex items-center justify-between pt-3 border-t">
+                            <span class="text-2xl font-bold text-blue-600">${product.price} $HT</span>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Initial render
+        renderProducts();
     </script>
 </body>
 </html>
